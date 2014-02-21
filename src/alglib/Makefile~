@@ -1,0 +1,22 @@
+CC=			g++
+CFLAGS=		-g -Wall -O2
+LOBJS=		alglibinternal.o  diffequations.o  statistics.o alglibmisc.o      fasttransforms.o  optimization.o ap.o  integration.o solvers.o dataanalysis.o    interpolation.o   specialfunctions.o alglibinterface.o
+
+PROG=		libalglib.a
+INCLUDES=	-I.
+LIBPATH=
+
+.SUFFIXES:.cpp .o
+
+.cpp.o:
+		$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@
+
+all:libalglib.a
+
+lib:libalglib.a
+
+libalglib.a:$(LOBJS)
+		$(AR) -csru $@ $(LOBJS)
+
+clean:
+	rm -fr *.o *.a
